@@ -488,7 +488,8 @@ body {
   display: flex;
   gap: 5px;
   align-items: center;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
+  overflow-x: auto;
 }
 
 .sub-label {
@@ -512,9 +513,9 @@ body {
 }
 
 .item-sub-input:focus { border-color: var(--forest-light); }
-.item-sub-input.qty { width: 44px; }
-.item-sub-input.unit { width: 52px; }
-.item-sub-input.price { width: 62px; text-align: right; }
+.item-sub-input.qty { width: 38px; }
+.item-sub-input.unit { width: 44px; }
+.item-sub-input.price { width: 54px; text-align: right; }
 
 .low-stock-btn {
   background: none;
