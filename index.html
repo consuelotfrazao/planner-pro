@@ -987,7 +987,7 @@ body {
   </div>
 
   <div class="action-strip">
-    <button class="strip-btn strip-btn-save" id="btn-salvar" onclick="salvarDados()">💾 Salvar</button>
+    <button class="strip-btn strip-btn-save" id="btn-salvar" onclick="salvarDados(true)">💾 Salvar</button>
     <button class="strip-btn" onclick="addCategory()">✦ Categoria</button>
     <button class="strip-btn" onclick="sortAllAlpha()">🔤 A–Z</button>
     <button class="strip-btn strip-btn-fav" onclick="showFavs()">⭐ Favoritos</button>
@@ -1071,7 +1071,7 @@ function carregarHist() {
   return [];
 }
 
-function salvarDados() {
+function salvarDados(manual) {
   try {
     const dados = {
       cats: state,
@@ -1084,14 +1084,17 @@ function salvarDados() {
       notes: window._notes||''
     };
     localStorage.setItem(CHAVE, JSON.stringify(dados));
-    const fb = document.getElementById('save-feedback');
-    fb.classList.add('show');
-    setTimeout(() => fb.classList.remove('show'), 1800);
-    const btn = document.getElementById('btn-salvar');
-    if (btn) {
-      btn.textContent = '✅ Salvo!';
-      clearTimeout(window._st);
-      window._st = setTimeout(() => { btn.textContent = '💾 Salvar'; }, 2000);
+    // Só mostra feedback visual quando o usuário clica no botão
+    if (manual) {
+      const fb = document.getElementById('save-feedback');
+      fb.classList.add('show');
+      setTimeout(() => fb.classList.remove('show'), 1800);
+      const btn = document.getElementById('btn-salvar');
+      if (btn) {
+        btn.textContent = '✅ Salvo!';
+        clearTimeout(window._st);
+        window._st = setTimeout(() => { btn.textContent = '💾 Salvar'; }, 2000);
+      }
     }
   } catch(e) { alert('Não foi possível salvar. Verifique o armazenamento do navegador.'); }
 }
